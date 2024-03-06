@@ -1,0 +1,46 @@
+<a
+  class="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+ 
+  (click)="toggleDropdown($event)"
+  #btnDropdownRef
+>
+  <i class="fas fa-bell text-2xl"></i> 
+</a>
+<div class="min-w-48 z-50" #popoverDropdownRef>
+  <div
+
+  class="bg-white text-base z-50 float-right py-2 list-right text-left rounded shadow-lg min-w-48"
+  [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'"
+  style="position: absolute; right: 0;" 
+>
+  <div
+    class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1 min-w-48"
+    
+  >
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+    >
+      Action
+    </a>
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+    >
+     hello
+    </a>
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+    >
+      Something else here
+    </a>
+    <div class="h-0 my-2 border border-solid border-gray-100"></div>
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+    >
+      Seprated link
+    </a>
+  </div>
+</div>

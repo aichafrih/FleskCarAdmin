@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'FleskCarAdmin';
+  collapseShow = "hidden";
+  constructor() {}
+
+  ngOnInit() {}
+  toggleCollapseShow(classes: string) {
+    this.collapseShow = classes;
+  }
 }

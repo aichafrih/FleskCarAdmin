@@ -1,0 +1,37 @@
+<!-- Navbar -->
+<nav
+  class="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4"
+>
+  <div
+    class="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4"
+  >
+    <!-- Brand -->
+    <a
+      class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
+      >Dashboard</a
+    >
+    <p>{{ currentRoute }}</p>
+    <!-- Form -->
+    <form
+      class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-4"
+    >
+      <div class="relative flex w-full flex-wrap items-stretch">
+        <span
+          class="z-10 h-full leading-snug font-normal absolute text-center text-gray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3"
+          ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/></svg></span>
+        <input
+          type="text"
+          placeholder="Recherche ici..."
+          class="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"
+        />
+      </div>
+    </form>
+
+  <ul class="flex-col md:flex-row list-none items-center hidden md:flex mr-2">
+     <app-notification-dropdown class="block"></app-notification-dropdown>
+    </ul>
+    <ul class="flex-col md:flex-row list-none items-center hidden md:flex">
+      <app-user-dropdown class="block"></app-user-dropdown>
+    </ul>
+  </div>
+</nav>
