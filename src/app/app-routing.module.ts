@@ -12,33 +12,32 @@ import { ExpertsComponent } from './views/admin/experts/experts.component';
 import { DemandeexpertComponent } from './views/admin/demandeexpert/demandeexpert.component';
 import { AnnoncesComponent } from './views/admin/annonces/annonces.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
-    // auth views
-    { path: "login", component: LoginComponent },
-    { path: "", redirectTo: "login", pathMatch: "full" },
- 
-   // admin views
-   {
-     path: "admin",
-     component:DashAdminComponent,
-     children: [
-       { path: "dashboard", component:DashboardComponent  },
-       {
-        path: "profile", component:ProfileComponent},
-       { path: "settings", component: SettingsComponent },
-       { path: "tables", component: TablesComponent },
-       { path: "Utilisateurs", component: UtilisateurComponent },
-       { path: "Experts", component: ExpertsComponent },
-       { path: "DemandeExpert", component: DemandeexpertComponent },
-       {path: "Annonces", component: AnnoncesComponent },
-       { path: "maps", component: MapsComponent },
-       { path: "", redirectTo: "dashboard", pathMatch: "full" },
-     ],
-   },
-  
- 
+   // Auth views
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
+  // Admin views
+  {
+    path: 'admin',
+    component: DashAdminComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'settings', component: SettingsComponent },
+      { path: 'tables', component: TablesComponent },
+      { path: 'Utilisateurs', component: UtilisateurComponent },
+      { path: 'Experts', component: ExpertsComponent },
+      { path: 'DemandeExpert', component: DemandeexpertComponent },
+      { path: 'Annonces', component: AnnoncesComponent },
+      { path: 'maps', component: MapsComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+    ]
+  }
 ];
 
 @NgModule({

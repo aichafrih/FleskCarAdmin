@@ -34,6 +34,9 @@ import { TableDropdownComponent } from './compenents/dropdowns/table-dropdown/ta
 import { PagesDropdownComponent } from './compenents/dropdowns/pages-dropdown/pages-dropdown.component';
 import { LangingComponent } from './views/admin/langing/langing.component';
 import { ExpertsComponent } from './views/admin/experts/experts.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -67,13 +70,19 @@ import { ExpertsComponent } from './views/admin/experts/experts.component';
      TableDropdownComponent,
      PagesDropdownComponent,
      LangingComponent,
-     ExpertsComponent,  
+     ExpertsComponent,
+     CarouselComponent,  
     
   ],
   
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule ,
+    HttpClientModule
+    
   ],
   
   providers: [],
