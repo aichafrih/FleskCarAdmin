@@ -34,7 +34,7 @@ export class UserService {
   getAdminDashboard(): Observable<any> {
     // Définissez vos en-têtes personnalisés ici
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer VOTRE_TOKEN_JWT',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
       'Content-Type': 'application/json'
       // Ajoutez d'autres en-têtes si nécessaire
     });
