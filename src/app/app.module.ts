@@ -22,8 +22,6 @@ import { MapsComponent } from './views/admin/maps/maps.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { CardLineChartComponent } from './compenents/card/card-line-chart/card-line-chart.component';
 import { CardBarChartComponent } from './compenents/card/card-bar-chart/card-bar-chart.component';
-import { CardPageVisitsComponent } from './compenents/card/card-page-visits/card-page-visits.component';
-import { CardSocialTrafficComponent } from './compenents/card/card-social-traffic/card-social-traffic.component';
 import { CommonModule } from '@angular/common';
 import { DashAdminComponent } from './layout/dash-admin/dash-admin.component';
 import { CardProfileComponent } from './compenents/card/card-profile/card-profile.component';
@@ -60,8 +58,6 @@ import { CarouselComponent } from './carousel/carousel.component';
     ProfileComponent,
      CardLineChartComponent,
      CardBarChartComponent,
-     CardPageVisitsComponent,
-     CardSocialTrafficComponent,
      DashAdminComponent,
      CardProfileComponent,
      CardTableComponent,

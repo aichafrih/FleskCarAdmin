@@ -35,7 +35,7 @@ const routes: Routes = [
       { path: 'DemandeExpert', component: DemandeexpertComponent },
       { path: 'Annonces', component: AnnoncesComponent },
       { path: 'maps', component: MapsComponent },
-   
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }
 ];
