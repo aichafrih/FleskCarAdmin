@@ -40,6 +40,45 @@ export class NotificationDropdownComponent implements OnInit{
  error: string = '';
   constructor(private notificationService: AdminService) { }
 
+
+  
+  extractNames(content: string): string[] {
+    // Créer un tableau pour stocker les noms extraits
+    const names: string[] = [];
+
+    // Rechercher le mot après "firstName"
+    const firstNameIndex = content.indexOf('firstName');
+    if (firstNameIndex !== -1) {
+      const firstNameEndIndex = content.indexOf(',', firstNameIndex);
+      if (firstNameEndIndex !== -1) {
+        let firstName = content.substring(firstNameIndex + 11, firstNameEndIndex); // 11 est la longueur de "firstName: "
+        // Supprimer les guillemets doubles si présents
+        firstName = firstName.replace(/"/g, '');
+        names.push(firstName.trim());
+      }
+    }
+
+    // Rechercher le mot après "lastName"
+    const lastNameIndex = content.indexOf('lastName');
+    if (lastNameIndex !== -1) {
+      const lastNameEndIndex = content.indexOf(',', lastNameIndex);
+      if (lastNameEndIndex !== -1) {
+        let lastName = content.substring(lastNameIndex + 10, lastNameEndIndex); // 10 est la longueur de "lastName: "
+        // Supprimer les guillemets doubles si présents
+        lastName = lastName.replace(/"/g, '');
+        names.push(lastName.trim());
+      }
+    }
+
+    return names;
+  }
+
+
+
+
+
+
+
   ngOnInit(): void {
     this.fetchNotifications(); // Appel de la fonction pour récupérer les notifications
   }
