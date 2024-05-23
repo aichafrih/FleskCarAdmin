@@ -3,8 +3,10 @@
   (click)="toggleDropdown($event)"
   #btnDropdownRef
 >
-  <i class="fas fa-bell text-2xl"></i>
-  <span *ngIf="notifications.length > 0 && !dropdownPopoverShow" class="ml-1 text-red-500">{{ notifications.length }}</span>
+  <i class="fas fa-bell text-2xl"> 
+    <span *ngIf="getUnreadCount() > 0" class="absolute   w-3 h-3 bg-red-600 text-white text-xs font-bold text-center rounded-full">{{ getUnreadCount() }}</span></i>
+ 
+ 
 </a>
 <div class="min-w-48 z-50" #popoverDropdownRef>
   <div
@@ -16,16 +18,18 @@
       class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1 min-w-48"
     >
     <a
-        *ngFor="let notification of notifications"
-        href="#pablo"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
+        *ngFor="let notification of notifications"  (click)="markAsRead(notification.idn)" routerLink="/admin/DemandeExpert"
+        [ngClass]="{'text-gray-800': !notification.isRead, 'text-gray-300': notification.isRead}" 
+       
+        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent "
       >
       <ng-container *ngFor="let name of extractNames(notification.content)">
         {{ name }}
       </ng-container>
        demander d'être un expert
-        
-        
+       <br>
+       {{notification.createdAt | date:'dd-MM-yyyy'}}
+    
         <div class="h-0 my-2 border border-solid border-gray-100"></div>
    
       </a>

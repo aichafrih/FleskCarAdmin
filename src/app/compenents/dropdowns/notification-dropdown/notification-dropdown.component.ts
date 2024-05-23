@@ -3,6 +3,7 @@ import { createPopper } from "@popperjs/core";
 import { AdminService } from "src/app/admin.service";
 import { Notification } from '../../../notification.model';
 import { HttpErrorResponse } from "@angular/common/http";
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 
@@ -16,6 +17,7 @@ export class NotificationDropdownComponent implements OnInit{
   btnDropdownRef!: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef!: ElementRef;
+  sanitizer: any;
 
   toggleDropdown(event: { preventDefault: () => void; }) {
     event.preventDefault();
@@ -112,5 +114,36 @@ export class NotificationDropdownComponent implements OnInit{
         }
       );
   }
+
   
-}  
+
+
+
+
+
+
+  markAsRead(notificationId: number): void {
+    const token = localStorage.getItem('token');
+    if(token){
+    this.notificationService.getNotificationByIdAndMarkAsRead(notificationId,token).subscribe(
+      () => {
+        // Mettez à jour localement la notification marquée comme lue
+        const notificationIndex = this.notifications.findIndex(notification => notification.idn === notificationId);
+        if (notificationIndex !== -1) {
+          this.notifications[notificationIndex].isRead = true;
+        }
+      },
+      (error) => {
+        console.error('Erreur lors de la mise à jour de la notification :', error);
+        // Gérer l'erreur ici, par exemple afficher un message à l'utilisateur
+      }
+    );
+  }
+}
+getUnreadCount(): number {
+  return this.notifications.filter(notification => !notification.isRead).length;
+}
+
+
+
+ }

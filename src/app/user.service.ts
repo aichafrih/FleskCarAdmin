@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user.model'; // Définissez le modèle User selon la structure de vos données côté serveur
+import { Expert } from './Expert.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,13 @@ export class UserService {
   }
 
 
+  searchExperts(key: string, authToken: string): Observable<Expert[]> {
+    const url = `${this.apiUrl}search-experts?key=${key}`;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
+    return this.http.get<Expert[]>(url, { headers });
+  }
+
+
 
   getAdminDashboard(): Observable<any> {
     // Définissez vos en-têtes personnalisés ici
@@ -42,4 +50,15 @@ export class UserService {
     // Utilisez les en-têtes dans la requête
     return this.http.get<any>('http://localhost:3000/admin/dashboard', { headers: headers });
   }
+
+  getProfileImage(ExpertId: number): Observable<any> {
+    return this.http.get(`http://localhost:3000/expert/profile-image/${ExpertId}`, { responseType: 'blob' });
+  }
+
+
+
+
+
+
+
 }

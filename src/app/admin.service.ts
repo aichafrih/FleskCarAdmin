@@ -23,6 +23,36 @@ export class AdminService {
     return this.http.get<Notification[]>('http://localhost:3000/admin/notifications', { headers });
   }
   
+  getNotificationByIdAndMarkAsRead(id: number, token: string): Observable<Notification> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`, // Utilisez le token passé en paramètre
+      'Content-Type': 'application/json'
+      // Ajoutez d'autres en-têtes si nécessaire
+    });
+    return this.http.get<Notification>(`http://localhost:3000/admin/notifications/${id}`, { headers });
+  }
+
+  // Méthode pour récupérer un CV à partir d'une notification spécifique
+  getCVFromNotification(id: number, token: string): Observable<Blob> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`, // Utilisez le token passé en paramètre
+      'Content-Type': 'application/json'
+      // Ajoutez d'autres en-têtes si nécessaire
+    });
+    return this.http.get(`http://localhost:3000/admin/notifications/${id}/cv`, { headers, responseType: 'blob' });
+  }
+ 
+  
+
+
+
+
+
+
+
+
+
+
   createSubscription(createSubscriptionDto: CreateSubscription, token: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -112,11 +142,40 @@ export class AdminService {
   }
 
   getExpertById(id: number, token: string): Observable<Expert> {
+ 
+    return this.http.get<Expert>(`http://localhost:3000/admin/experts/${id}`);
+  }
+
+
+  updateProfileImage(file: File, token: string): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Expert>(`http://localhost:3000/admin/experts/${id}`, { headers: headers });
+
+    return this.http.put(`http://localhost:3000/admin/update-profile-image`, formData, { headers });
   }
+
+  getProfileImage(adminId: number): Observable<any> {
+    return this.http.get(`http://localhost:3000/admin/profile-image/${adminId}`, { responseType: 'blob' });
+  }
+
+ 
+  updateAccount(email: string, MotDePasse: string, token: string): Observable<any> {
+    const updateAccountDto = { email, MotDePasse }; // Créez l'objet updateAccountDto avec les champs email et password
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` // Ajoutez votre jeton d'authentification ici
+    });
+
+    return this.http.put<any>(`http://localhost:3000/admin/update_adaccount`, updateAccountDto, { headers });
+  }
+
+
+
+  
 }
 
 

@@ -35,6 +35,8 @@ import { ExpertsComponent } from './views/admin/experts/experts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CarouselComponent } from './carousel/carousel.component';
+import { RejeterComponent } from './views/admin/rejeter/rejeter.component';
+
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { CarouselComponent } from './carousel/carousel.component';
      PagesDropdownComponent,
      LangingComponent,
      ExpertsComponent,
-     CarouselComponent,  
+     CarouselComponent,
+     RejeterComponent,
+    
     
   ],
   

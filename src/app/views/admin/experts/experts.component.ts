@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Expert } from 'src/app/Expert.model';
 import { AdminService } from 'src/app/admin.service';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-experts',
@@ -11,8 +12,9 @@ export class ExpertsComponent implements OnInit {
 
   experts: Expert[] = [];
   token!: string | null;
+  searchKey: string = '';
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService,private userService: UserService) {}
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token');
@@ -43,6 +45,22 @@ export class ExpertsComponent implements OnInit {
       );
     } else {
       console.log('Le jeton d\'authentification est null. Assurez-vous qu\'il est correctement défini.');
+    }
+  }
+
+  searchExperts(): void {
+    const token = localStorage.getItem('token');
+    if (token && this.searchKey.trim() !== '') {
+      this.userService.searchExperts(this.searchKey, token).subscribe(
+        (data: Expert[]) => {
+          this.experts = data;
+        },
+        (error) => {
+          console.error('Error searching users:', error);
+        }
+      );
+    } else {
+      console.error('Missing token or empty search key');
     }
   }
 }
