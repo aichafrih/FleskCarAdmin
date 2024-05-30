@@ -42,7 +42,29 @@ export class NotificationDropdownComponent implements OnInit{
  error: string = '';
   constructor(private notificationService: AdminService) { }
 
-
+  cleanContent(content: string): string {
+    // Trouver l'index du mot "body"
+    const bodyIndex = content.indexOf('body');
+  
+    // Trouver l'index du mot "data"
+    const dataIndex = content.indexOf('data');
+  
+    // Extraire le texte entre "body" et "data" s'ils sont trouvés
+    let cleanedContent: string;
+    if (bodyIndex !== -1 && dataIndex !== -1 && bodyIndex < dataIndex) {
+      cleanedContent = content.substring(bodyIndex + 5, dataIndex); // +5 pour inclure le mot "body"
+    } else if (bodyIndex !== -1) {
+      cleanedContent = content.substring(bodyIndex + 5); // +5 pour inclure le mot "body"
+    } else {
+      cleanedContent = content; // Retourner le contenu complet si "body" n'est pas trouvé
+    }
+  
+    // Supprimer les guillemets doubles
+    cleanedContent = cleanedContent.replace(/[":,]/g, '');
+  
+    return cleanedContent;
+  }
+  
   
   extractNames(content: string): string[] {
     // Créer un tableau pour stocker les noms extraits
