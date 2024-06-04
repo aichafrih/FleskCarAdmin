@@ -36,6 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CarouselComponent } from './carousel/carousel.component';
 import { RejeterComponent } from './views/admin/rejeter/rejeter.component';
+import { ClientbloquerComponent } from './views/admin/clientbloquer/clientbloquer.component';
+import { ExpertbloquerComponent } from './views/admin/expertbloquer/expertbloquer.component';
 
 
 @NgModule({
@@ -71,6 +73,8 @@ import { RejeterComponent } from './views/admin/rejeter/rejeter.component';
      ExpertsComponent,
      CarouselComponent,
      RejeterComponent,
+     ClientbloquerComponent,
+     ExpertbloquerComponent,
     
     
   ],

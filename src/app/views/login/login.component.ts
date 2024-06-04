@@ -33,13 +33,14 @@ export class LoginComponent implements OnInit {
        
         console.log('Connexion réussie !', response);
         localStorage.setItem('token', response.token);
+        this.router.navigate(['/admin']);
         // Vérifier si l'identifiant de l'administrateur est défini dans la réponse
         if (response.admin && response.admin.ida) {
           // Stocker l'identifiant de l'administrateur dans le service d'authentification
           this.authServiceS.setadminId(response.admin.ida);
           localStorage.setItem('token', response.token);
           // Rediriger l'utilisateur vers la page d'administration avec l'identifiant de l'administrateur
-          this.router.navigate(['/admin']);
+         
         } else {
           console.error('Identifiant de l\'utilisateur non défini dans la réponse du backend.');
           // Gérer l'erreur, par exemple afficher un message à l'utilisateur

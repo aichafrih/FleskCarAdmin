@@ -13,6 +13,9 @@ import { DemandeexpertComponent } from './views/admin/demandeexpert/demandeexper
 import { AnnoncesComponent } from './views/admin/annonces/annonces.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { AuthGuard } from './auth.guard';
+import { RejeterComponent } from './views/admin/rejeter/rejeter.component';
+import { ClientbloquerComponent } from './views/admin/clientbloquer/clientbloquer.component';
+import { ExpertbloquerComponent } from './views/admin/expertbloquer/expertbloquer.component';
 
 
 const routes: Routes = [
@@ -35,6 +38,10 @@ const routes: Routes = [
       { path: 'DemandeExpert', component: DemandeexpertComponent },
       { path: 'Annonces', component: AnnoncesComponent },
       { path: 'maps', component: MapsComponent },
+      { path: 'rejeter', component: RejeterComponent  },
+      { path: 'clientbloquer', component: ClientbloquerComponent },
+      { path: 'expertbloquer', component: ExpertbloquerComponent },
+     
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }
