@@ -3,6 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { PubFilterDto } from 'src/app/PubFilterDto.model';
 import { Publication } from 'src/app/Publication.model';
 import { PublicationService } from 'src/app/Publication.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-annonces',
@@ -13,7 +14,8 @@ export class AnnoncesComponent implements OnInit {
 
   imageSubscriptions: Subscription[] = [];
   publications: Publication[] = [];
-
+  boiteVitesses$!: Observable<string[]>; 
+  citys$!: Observable<string[]>; 
   constructor(private publicationService: PublicationService) {}
 
   ngOnInit(): void {
@@ -23,6 +25,14 @@ export class AnnoncesComponent implements OnInit {
     this.getAllMarques();
     this.getAllCouleurs();
     this.getAllFuelTypes();
+    this.getAllBoiteVitesse();
+    this.getAllCity();
+  }
+  getAllBoiteVitesse(): void {
+    this.boiteVitesses$ = this.publicationService.getAllBoiteVitesse();
+  }
+  getAllCity(): void {
+    this.citys$ = this.publicationService.getAllCity();
   }
 
   getAllPublications(): void {
@@ -124,4 +134,40 @@ loadImagesForPublications(): void {
   });
 }
 
+onDelete(pubId: number) {
+  Swal.fire({
+    title: 'Êtes-vous sûr?',
+    text: "Vous êtes sûr de vouloir supprimer cette annonce?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Oui, supprimer!',
+    cancelButtonText: 'Annuler'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        this.publicationService.deletePub(pubId, token).subscribe(
+          () => {
+            Swal.fire(
+              'Supprimé!',
+              'Votre publication a été supprimée.',
+              'success'
+            );
+            this.getAllPublications(); // Rafraîchissez la liste des publications
+          },
+          error => {
+            console.error('Erreur lors de la suppression de la publication', error);
+            Swal.fire(
+              'Erreur!',
+              'Une erreur est survenue lors de la suppression de la publication.',
+              'error'
+            );
+          }
+        );
+      }
+    }
+  });
+}
 }

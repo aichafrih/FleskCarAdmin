@@ -1,1 +1,79 @@
-<p>clientbloquer works!</p>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white">
+<div class="text-center my-4" *ngIf="blockedUsers && blockedUsers.length === 0">
+    Aucun client bloqué.
+  </div>
+
+</div>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white" *ngIf="blockedUsers && blockedUsers.length > 0">
+    <br>
+    <p class="text-lg md:text-2xl dark:text-white font-semibold leading-6 xl:leading-5 text-gray-800 mx-4">
+      La Liste de les Clients Bloqués
+      <br>
+      <br>
+    </p>
+  
+    <div class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 dark:bg-gray-900 mx-4">
+  
+      <!-- Table -->
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="p-4">
+            </th>
+            <th scope="col" class="px-4 py-3">
+              Nom
+            </th>
+            <th scope="col" class="px-4 py-3">
+              Adresse
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Numéro de téléphone
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Membre depuis
+            </th>
+            <th scope="col" class="px-6 py-3">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Utilisateurs bloqués -->
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" *ngFor="let user of blockedUsers">
+            <td class="w-4 p-4">
+            </td>
+            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+              <img class="w-10 h-10 rounded-full mr-2" [src]="'http://localhost:3000/uploads/profileimages/' + user.PhotoProfil" alt="Photo de profil de {{ user.Prenom }} {{ user.Nom }}">
+              <div class="ps-3">
+                <div class="text-base font-semibold"> {{ user.Prenom }} {{ user.Nom }}</div>
+                <div class="font-normal text-gray-500"> {{ user.email }}</div>
+              </div>
+            </th>
+            <td class="px-6 py-4">
+              {{ user.Adresse }}, {{ user.Ville }}, {{ user.CodePostal }}
+            </td>
+            <td class="px-6 py-4">
+              {{ user.NumTel }}
+            </td>
+            <td class="px-6 py-4">
+              <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ user.createdAt | date:'dd-MM-yyyy' }}</a>
+            </td>
+            <td class="w-4 p-4">
+              <div class="flex flex-col gap-2">
+                <button (click)="unblockUser(user.id)" class="flex cursor-pointer items-center gap-2 rounded-lg bg-red-500 p-2">
+                  <div class="text-white">Débloquer</div>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+  
+  <!-- Afficher "Aucun client bloqué" si la liste est vide -->
+  <div class="text-center my-4" *ngIf="blockedUsers && blockedUsers.length === 0">
+    Aucun client bloqué.
+  </div>
+  

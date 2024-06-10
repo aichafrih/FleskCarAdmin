@@ -11,5 +11,8 @@ export interface PubFilterDto {
     prixMax?: number;
     typeCarburant?: string;
     couleur?: string;
+    city?: string;
+    boiteVitesse?: string;
+   
   }
   

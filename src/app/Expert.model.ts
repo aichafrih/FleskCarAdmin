@@ -9,5 +9,6 @@ export interface Expert {
     tel: string;
     createdAt: Date;
     updatedAt: Date;
+    PhotoProfil: string;
   }
   

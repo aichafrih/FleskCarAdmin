@@ -1,1 +1,81 @@
-<p>expertbloquer works!</p>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white">
+   <div class="text-center my-4" *ngIf="blockedExperts.length === 0">
+  <p >Aucun expert bloqué.</p>
+</div>
+    
+    </div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white" *ngIf="blockedExperts.length > 0">
+    <br>
+    <p class="text-lg md:text-2xl dark:text-white font-semibold leading-6 xl:leading-5 text-gray-800 mx-4">
+La Liste de les experts Bloquer
+</p>
+
+<br>
+<div class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4  dark:bg-gray-900 mx-4">
+     
+
+    <!--button-->
+
+<!--table-->
+
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="p-4 ">
+                   
+                </th>
+                <th scope="col" class="px-4 py-3">
+                    Nom
+                </th>
+                <th scope="col" class="px-4 py-3">
+                    Num téléphone
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Expert Depuis
+                </th>
+                <th scope="col" class="px-6 py-3">
+                   ville
+                </th>
+                <th scope="col" class="px-6 py-3">
+                   
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <!--le premier user-->
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"  *ngFor="let expert of blockedExperts">
+                <td class="w-4 p-4">
+                
+                </td>
+                <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                    <img class="w-10 h-10 rounded-full mr-2" [src]="'http://localhost:3000/uploads/profileimages/' +  expert.PhotoProfil" alt="Photo de profil">
+                    <div class="ps-3">
+                        <div class="text-base font-semibold">{{ expert.firstName }} {{ expert.lastName }}</div>
+                        <div class="font-normal text-gray-500">{{ expert.email }}</div>
+                    </div>  
+                </th>
+                <td class="px-6 py-4">
+                    {{ expert.tel }}
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex items-center">
+                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>  {{ expert.createdAt | date:'dd-MM-yyyy' }}
+                    </div>
+                </td>
+                <td class="px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ expert.city }}</a>
+                </td>
+                <td class="w-4 p-4">
+                    <div class="flex flex-col gap-2">
+                        <button (click)="unblockExpert(expert.ide)" id="deleteButton" class="flex cursor-pointer items-center gap-2 rounded-lg bg-red-500 p-2">
+                            <label class="cursor-pointer"></label>
+                            <div id="deleteText" class="text-white">Débloquer</div>
+                        </button>
+                    </div>
+                  </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
           // Stocker l'identifiant de l'administrateur dans le service d'authentification
           this.authServiceS.setadminId(response.admin.ida);
           localStorage.setItem('token', response.token);
+          this.router.navigate(['/admin']);
           // Rediriger l'utilisateur vers la page d'administration avec l'identifiant de l'administrateur
          
         } else {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { User } from 'src/app/user.model';
 import { UserService } from 'src/app/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-utilisateur',
@@ -12,6 +12,9 @@ export class UtilisateurComponent implements OnInit {
 
   users: User[] = [];
   searchKey: string = '';
+  userId: number | undefined; 
+  user: User | null = null;
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -25,11 +28,14 @@ export class UtilisateurComponent implements OnInit {
     }
   }
 
-
   loadUsers(): void {
     this.userService.getUsers().subscribe(
       (data: User[]) => {
         this.users = data;
+        if (this.users.length > 0) {
+          this.userId = this.users[0].id as number; // Convertir en nombre
+          this.loadUserById(this.userId);
+        }
       },
       (error) => {
         console.error('Error fetching users:', error);
@@ -43,21 +49,73 @@ export class UtilisateurComponent implements OnInit {
       this.userService.searchUsers(this.searchKey, token).subscribe(
         (data: User[]) => {
           this.users = data;
+          if (this.users.length > 0) {
+            this.userId = this.users[0].id as number; // Convertir en nombre
+            this.loadUserById(this.userId);
+          }
         },
         (error) => {
           console.error('Error searching users:', error);
         }
       );
     } else {
-      console.error('Missing token or empty search key');
+      this. loadUsers();
     }
   }
 
+  loadUserById(userId: number): void {
+    this.userService.getUserById(userId).subscribe(
+      (user: User) => {
+        this.user = user;
+        console.log('User:', this.user);
+      },
+      (error) => {
+        console.error('Error fetching user:', error);
+      }
+    );
+  }
+  
 
 
- 
+  blockUser(userId: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir bloquer cet utilisateur?',
+      text: 'Une fois bloqué, cet utilisateur ne pourra plus accéder à votre site.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, bloquer!',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const token = localStorage.getItem('token');
+        if (token) {
+          this.userService.blockUser(userId, token).subscribe(
+            response => {
+              console.log('User blocked successfully:', response);
+              // Afficher une alerte de succès
+              Swal.fire({
+                icon: 'success',
+                title: 'Utilisateur bloqué avec succès!',
+                showConfirmButton: false,
+                timer: 1500 // Fermer l'alerte après 1.5 secondes
+              });
+            },
+            error => {
+              console.error('Error blocking user:', error);
+              // Afficher une alerte d'erreur
+              Swal.fire({
+                icon: 'error',
+                title: 'Erreur lors du blocage de l\'utilisateur',
+                text: 'Veuillez réessayer.',
+              });
+            }
+          );
+        } else {
+          console.error('No token found, user cannot be blocked.');
+        }
+      }
+    });
+  }
 }
-
-
-
-

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { User } from './user.model'; // Définissez le modèle User selon la structure de vos données côté serveur
 import { Expert } from './Expert.model';
 
@@ -58,7 +58,55 @@ export class UserService {
 
 
 
+  
+  blockUser(userId: number, token: string): Observable<any> {
+    const url = `http://localhost:3000/admin/block-user/${userId}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post(url, {}, { headers });
+  }
+
+  getUserById(userId: number): Observable<User> {
+    return this.http.get<User>(`http://localhost:3000/admin/users/${userId}`);
+  }
+
+  unblockUser(userId: number): Observable<any> {
+    return this.http.patch<any>(`http://localhost:3000/admin/unblock/${userId}`, {});
+  }
 
 
+  blockExpert(expertId: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return throwError('Token not found in localStorage');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}block-expert/${expertId}`, {}, { headers }).pipe(
+      catchError((error: any) => {
+        return throwError('Error blocking user: ' + error.message);
+      })
+    );
+  }
+  getBlockedExperts(token: string): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<any[]>(`${this.apiUrl}blocked-experts`, { headers });
+  }
+  unblockExpert(ide: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.patch<any>(`${this.apiUrl}unblock-expert/${ide}`, {}, { headers });
+  }
 
 }

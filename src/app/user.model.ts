@@ -11,4 +11,6 @@ export interface User {
     PhotoProfil?: string;
     createdAt: Date;
   updatedAt: Date;
+  isBlocked: Boolean;
+
   }

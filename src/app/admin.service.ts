@@ -174,8 +174,23 @@ export class AdminService {
   }
 
 
+ 
+  getDemandes(token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
 
-  
+    return this.http.get(`http://localhost:3000/admin/demandes-creation-compte`, { headers });
+  }
+  deleteCreationCompteRequest(id: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.delete(`http://localhost:3000/admin/message/${id}`, { headers });
+  }
+
 }
 
 

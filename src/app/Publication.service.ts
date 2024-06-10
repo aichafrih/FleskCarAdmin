@@ -25,7 +25,10 @@ export class PublicationService {
     return this.http.get<any>(`${this.url}${publicationId}/images`);
   }
 
-
+  getAllBoiteVitesse(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.url}boiteVitesse`);
+  }
+ 
 
 
   searchPublications(filterDto: PubFilterDto): Observable<Publication[]> {
@@ -43,6 +46,8 @@ export class PublicationService {
     if (filterDto.prixMax) params = params.set('prixMax', filterDto.prixMax.toString());
     if (filterDto.typeCarburant != null) params = params.set('typeCarburant', filterDto.typeCarburant);
     if (filterDto.couleur != null) params = params.set('couleur', filterDto.couleur);
+    if (filterDto.city) params = params.set('city', filterDto.city);
+    if (filterDto.boiteVitesse) params = params.set('boiteVitesse', filterDto.boiteVitesse);
     // Ajoutez d'autres paramètres de la même manière
     
     return this.http.get<Publication[]>(`${this.url}search`, { params });
@@ -69,6 +74,9 @@ export class PublicationService {
   getAllMarques(): Observable<string[]> {
     return this.http.get<string[]>(`${this.url}marques`);
   }
+  getAllCity(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.url}City`);
+  }
 
   getAllModels(): Observable<string[]> {
     return this.http.get<string[]>(`${this.url}models`);
@@ -81,7 +89,20 @@ export class PublicationService {
   getAllFuelTypes(): Observable<string[]> {
     return this.http.get<string[]>(`${this.url}TypesCarburant`);
   }
+
+
+  deletePub(pubId: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.delete(`http://localhost:3000/admin/delete/${pubId}`, { headers });
+  }
 }
+
+
+
+
 
 
 

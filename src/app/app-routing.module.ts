@@ -27,17 +27,18 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DashAdminComponent,
-    canActivate: [AuthGuard],
+    
+  
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'tables', component: TablesComponent },
-      { path: 'Utilisateurs', component: UtilisateurComponent },
+      { path: 'Clients', component: UtilisateurComponent },
       { path: 'Experts', component: ExpertsComponent },
       { path: 'DemandeExpert', component: DemandeexpertComponent },
       { path: 'Annonces', component: AnnoncesComponent },
-      { path: 'maps', component: MapsComponent },
+      { path: 'paiment', component: MapsComponent },
       { path: 'rejeter', component: RejeterComponent  },
       { path: 'clientbloquer', component: ClientbloquerComponent },
       { path: 'expertbloquer', component: ExpertbloquerComponent },

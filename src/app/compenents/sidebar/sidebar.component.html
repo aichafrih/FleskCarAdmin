@@ -14,11 +14,11 @@
     </button>
     <!-- Brand -->
   
-      <div class="logo">
-        <div class="text-4xl text-center">
-
-          <span class="text-orange-500" >Flesk</span>Car 
-      </div></div>
+    <div class="logo">
+      <div class="text-4xl text-center flex items-center">
+     <img src="./assets/img/logo.svg" class="w-10 h-11">
+        <span class="text-orange-500 " routerLink="/home">Flesk</span>Car 
+    </div></div>
     <!-- User -->
     <ul class="md:hidden items-center flex flex-wrap list-none">
       <li class="inline-block relative">
@@ -100,7 +100,7 @@
         
         <li class="items-center">
           <a
-            [routerLink]="['/admin/Utilisateurs']"
+            [routerLink]="['/admin/Clients']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
             #adminUtilisateurs="routerLinkActive"
@@ -174,7 +174,7 @@
           [ngClass]="
          adminDemandeExpert.isActive ? 'opacity-75' : 'text-gray-400'
        "></i>
-            Demande d'Expert
+            Demande d'etre Expert
           </a>
         </li>
 
@@ -197,7 +197,7 @@
                 adminMaps.isActive ? 'opacity-75' : 'text-gray-400'
               "
             ></i>
-        Les Utilisateurs Bloquer
+        Les Clients Bloquer
           </a>
         </li>
 
@@ -227,36 +227,6 @@
         </li>
 
 
-
-
-
-
-
-
-        <li class="items-center">
-          <a
-            [routerLink]="['/admin/rejeter']"
-            class="text-xs uppercase py-3 font-bold block"
-            routerLinkActive
-            #adminMaps="routerLinkActive"
-            [ngClass]="
-              adminMaps.isActive
-                ? 'text-bg-orange-500 hover:text-orange-700'
-                : 'text-gray-700 hover:text-gray-500'
-            "
-          >
-            <i
-              class="fa-solid fa-users-slash mr-2 text-sm"
-              [ngClass]="
-                adminMaps.isActive ? 'opacity-75' : 'text-gray-400'
-              "
-            ></i>
-            Les demande d'etre un expert Refuser 
-          </a>
-        </li>
-
-
-
         <li class="items-center">
           <a
             [routerLink]="['/admin/tables']"
@@ -279,9 +249,10 @@
           </a>
         </li>
 
+
         <li class="items-center">
           <a
-            [routerLink]="['/admin/maps']"
+            [routerLink]="['/admin/settings']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
             #adminMaps="routerLinkActive"
@@ -292,7 +263,40 @@
             "
           >
             <i
-              class="fas fa-map-marked mr-2 text-sm"
+              class="fa-regular fa-message"
+              [ngClass]="
+                adminMaps.isActive ? 'opacity-75' : 'text-gray-400'
+              "
+            ></i>
+            Les Messages
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+
+        <li class="items-center">
+          <a
+            [routerLink]="['/admin/paiment']"
+            class="text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #adminMaps="routerLinkActive"
+            [ngClass]="
+              adminMaps.isActive
+                ? 'text-bg-orange-500 hover:text-orange-700'
+                : 'text-gray-700 hover:text-gray-500'
+            "
+          >
+            <i
+              class="fa-regular fa-money-bill-1 mr-2 text-sm"
               [ngClass]="
                 adminMaps.isActive ? 'opacity-75' : 'text-gray-400'
               "

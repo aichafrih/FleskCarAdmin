@@ -52,7 +52,7 @@ La Liste de tous les experts
                 
                 </td>
                 <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                    <img class="w-10 h-10 rounded-full mr-2" src="assets/img/team-1-800x800.jpg" alt="Jese image">
+                    <img class="w-10 h-10 rounded-full mr-2" [src]="'http://localhost:3000/uploads/profileimages/' +  expert.PhotoProfil" alt="Photo de profil">
                     <div class="ps-3">
                         <div class="text-base font-semibold">{{ expert.firstName }} {{ expert.lastName }}</div>
                         <div class="font-normal text-gray-500">{{ expert.email }}</div>
@@ -71,7 +71,7 @@ La Liste de tous les experts
                 </td>
                 <td class="w-4 p-4">
                     <div class="flex flex-col gap-2">
-                        <button id="deleteButton" class="flex cursor-pointer items-center gap-2 rounded-lg bg-red-500 p-2">
+                        <button (click)="blockExpert(expert.ide)" id="deleteButton" class="flex cursor-pointer items-center gap-2 rounded-lg bg-red-500 p-2">
                             <label class="cursor-pointer"></label>
                             <div id="deleteText" class="text-white">Bloquer</div>
                         </button>

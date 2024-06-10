@@ -18,6 +18,11 @@
                     city
                 </th>
                 <th scope="col" class="px-6 py-3">
+                   CV
+                </th>
+
+
+                <th scope="col" class="px-6 py-3">
                   Effectuer la Demande
                 </th>
                 <th scope="col" class="px-6 py-3"></th>
@@ -38,6 +43,13 @@
                 <td class="px-9 py-4">
                     {{ expertRequest.city }}
                 </td>
+               <td><a [href]="'http://localhost:3000/uploads/certif/' + expertRequest.cv" target="_blank" class="ml-4 text-blue-500 hover:underline">
+                Voir le CV
+                </a></td>
+
+
+
+
                 <td class="px-9 py-4">
                    {{ expertRequest.createdAt| date:'dd-MM-yyyy'}}
                 </td>
@@ -62,16 +74,5 @@
         </tbody>
     </table>
 </div>
-<nav class="inline-flex space-x-2.5">
-    <a class="flex items-center py-2 px-3 rounded font-medium select-none border text-gray-900 bg-white transition-colors hover:border-blue-600 hover:bg-blue-400 hover:text-white"
-        href="#">
-        ⪻
-        Previous
-    </a>
-    <a class="flex items-center py-2 px-3 rounded font-medium select-none border text-gray-900 bg-white transition-colors hover:border-blue-600 hover:bg-blue-400 hover:text-white"
-        href="#">
-        Next
-        ⪼
-    </a>
-</nav>
+
 </div>
